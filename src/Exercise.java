@@ -52,7 +52,7 @@ public class Exercise {
 			for (Hotel list : hotelList) {
 				System.out.println(list.getHotel() + " " + list.getRoomsAvailable());
 			}
-//
+
 			// Parse bookings.file
 			while ((line2 = br1.readLine()) != null) {
 
