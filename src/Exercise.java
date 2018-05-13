@@ -92,6 +92,7 @@ public class Exercise {
 					}
 
 				} else {
+					innerMap = new HashMap<String, Integer>();
 					innerMap.put(list.getDates(), 1);
 					listofhotels.put(list.getHotelName(), innerMap);
 				}
