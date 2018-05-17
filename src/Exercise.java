@@ -16,32 +16,39 @@ public class Exercise {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		String hotelFile = "/Users/varadaa/Desktop/Hotel.csv";
-		String bookingFile = "/Users/varadaa/Desktop/Bookings.csv";
+//		 String hotelFile = "/Users/varadaa/Desktop/Hotel.csv";
+//		 String bookingFile = "/Users/varadaa/Desktop/Bookings.csv";
+//		 String checkIn = "18-05-07";
+//		 String checkOut = "18-05-07";
+
+		execute(args[0], args[1], args[2], args[3]);
+		//execute(hotelFile, bookingFile, checkIn, checkOut);
+
+	}
+
+	public static void execute(String hotelFile, String BookingFile, String checkIn, String checkOut) {
 		BufferedReader br = null;
 		BufferedReader br1 = null;
 		String line = "";
 		String line2 = "";
 		String cvsSplitBy = ",";
 
+		ArrayList<Booking> hotelAvailable = new ArrayList<Booking>();
+
+		Map<String, Integer> hotelList = new HashMap<String, Integer>();
+		Map<String, Integer> available = new HashMap<String, Integer>();
+		Map<String, Map<String, Integer>> listofhotels = new HashMap<String, Map<String, Integer>>();
+
+		DateFormat formatter;
+		List<Date> dates = new ArrayList<Date>();
+		List<Date> cdates = new ArrayList<Date>();
+		formatter = new SimpleDateFormat("yy-MM-dd");
 		try {
 
 			// read Hotels file
-			br = new BufferedReader(new FileReader(args[0]));
+			br = new BufferedReader(new FileReader(hotelFile));
 			// read bookings file
-			br1 = new BufferedReader(new FileReader(args[1]));
-
-			ArrayList<Booking> hotelAvailable = new ArrayList<Booking>();
-
-			Map<String, Integer> hotelList = new HashMap<String, Integer>();
-			Map<String, Integer> available = new HashMap<String, Integer>();
-			Map<String, Map<String, Integer>> listofhotels = new HashMap<String, Map<String, Integer>>();
-
-			DateFormat formatter;
-			List<Date> dates = new ArrayList<Date>();
-			List<Date> cdates = new ArrayList<Date>();
-			formatter = new SimpleDateFormat("yy-MM-dd");
-
+			br1 = new BufferedReader(new FileReader(BookingFile));
 			// Parse Hotels.csv file
 			while ((line = br.readLine()) != null) {
 
@@ -93,8 +100,8 @@ public class Exercise {
 
 			}
 
-			String checkIn = args[2];
-			String checkOut = args[3];
+			// String checkIn = args[2];
+			// String checkOut = args[3];
 
 			cdates = getDates(checkIn, checkOut);
 
@@ -135,6 +142,7 @@ public class Exercise {
 				}
 			}
 		}
+
 	}
 
 	// method to provide range of dates from start and end date
