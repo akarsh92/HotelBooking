@@ -101,9 +101,7 @@ public class Exercise {
 
 			}
 
-			// String checkIn = args[2];
-			// String checkOut = args[3];
-
+//get list of dates from start date to end date
 			cdates = getDates(checkIn, checkOut);
 
 			// Output the hotels with rooms booked more than or equal to
