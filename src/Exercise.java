@@ -16,13 +16,14 @@ public class Exercise {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-//		 String hotelFile = "/Users/varadaa/Desktop/Hotel.csv";
-//		 String bookingFile = "/Users/varadaa/Desktop/Bookings.csv";
-//		 String checkIn = "18-05-07";
-//		 String checkOut = "18-05-07";
+		// String hotelFile = "/Users/varadaa/Desktop/Hotel.csv";
+		// String bookingFile = "/Users/varadaa/Desktop/Bookings.csv";
+		// String checkIn = "18-05-07";
+		// String checkOut = "18-05-07";
 
 		execute(args[0], args[1], args[2], args[3]);
-		//execute(hotelFile, bookingFile, checkIn, checkOut);
+
+		// execute(hotelFile, bookingFile, checkIn, checkOut);
 
 	}
 
