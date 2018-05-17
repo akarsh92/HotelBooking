@@ -26,12 +26,14 @@ public class Exercise {
 
 		try {
 
-			br = new BufferedReader(new FileReader(hotelFile));
-			br1 = new BufferedReader(new FileReader(bookingFile));
+			// read Hotels file
+			br = new BufferedReader(new FileReader(args[0]));
+			// read bookings file
+			br1 = new BufferedReader(new FileReader(args[1]));
 
-			ArrayList<Hotel> hotelList = new ArrayList<Hotel>();
 			ArrayList<Booking> hotelAvailable = new ArrayList<Booking>();
 
+			Map<String, Integer> hotelList = new HashMap<String, Integer>();
 			Map<String, Integer> available = new HashMap<String, Integer>();
 			Map<String, Map<String, Integer>> listofhotels = new HashMap<String, Map<String, Integer>>();
 
@@ -45,12 +47,8 @@ public class Exercise {
 
 				// use comma as separator
 				String[] hotels = line.split(cvsSplitBy);
-				hotelList.add(new Hotel(hotels[0], Integer.parseInt(hotels[1])));
+				hotelList.put(hotels[0], Integer.parseInt(hotels[1]));
 
-			}
-
-			for (Hotel list : hotelList) {
-				System.out.println(list.getHotel() + " " + list.getRoomsAvailable());
 			}
 
 			// Parse bookings.file
@@ -72,11 +70,7 @@ public class Exercise {
 
 			}
 
-			for (Booking list1 : hotelAvailable) {
-				System.out.println(list1.getHotelName() + " " + list1.getDates());
-			}
-
-			System.out.println("**********");
+			// Calculate Number of rooms available with specific date
 
 			Map<String, Integer> innerMap = new HashMap<String, Integer>();
 			for (Booking list : hotelAvailable) {
@@ -99,10 +93,34 @@ public class Exercise {
 
 			}
 
-			String checkIn = "18-05-07";
-			String checkOut = "18-05-07";
+			String checkIn = args[2];
+			String checkOut = args[3];
 
 			cdates = getDates(checkIn, checkOut);
+
+			// Output the hotels with rooms booked more than or equal to
+			// available rooms
+			for (Map.Entry<String, Map<String, Integer>> entry : listofhotels.entrySet()) {
+
+				for (Map.Entry<String, Integer> entry2 : entry.getValue().entrySet()) {
+					for (int i = 0; i < cdates.size(); i++) {
+						Date lDate = (Date) cdates.get(i);
+						String ds = formatter.format(lDate);
+						if (ds.equals(entry2.getKey()) && entry2.getValue() > hotelList.get(entry.getKey())) {
+							available.put(entry.getKey(), 1);
+						}
+
+					}
+
+				}
+
+			}
+
+			// Output all available rooms for a specific date range
+			for (Map.Entry<String, Integer> entry11 : hotelList.entrySet()) {
+				if (!available.containsKey(entry11.getKey()))
+					System.out.println(entry11.getKey());
+			}
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -119,6 +137,7 @@ public class Exercise {
 		}
 	}
 
+	// method to provide range of dates from start and end date
 	public static List<Date> getDates(String sdate, String edate) {
 		DateFormat formatter;
 		List<Date> dates = new ArrayList<Date>();
